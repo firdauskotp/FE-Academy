@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+
+  <title>FirdausEisner — Academy</title>
+  <meta name="description" content="Academic & training website for FirdausEisner — courses, plans, instructors, and reviews.">
+  <meta name="theme-color" content="#0b1020">
+
+  <meta property="og:title" content="FirdausEisner — Academy">
+  <meta property="og:description" content="Academic & training website — plans, instructors, and reviews.">
+  <meta property="og:type" content="website">
+
+  <!-- Use title image as site icon -->
+  <link rel="icon" href="img/title.jpg">
+  <link rel="apple-touch-icon" href="img/title.jpg">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <header class="navbar-wrap" id="siteHeader">
+    <nav class="navbar" aria-label="Primary">
+      <div class="nav-inner">
+
+        <a href="#home" class="brand">
+          <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+          <span>FirdausEisner</span>
+        </a>
+
+        <div class="nav-links" aria-label="Site">
+          <a href="#home" class="nav-link"><i class="fa-solid fa-house"></i>Home</a>
+          <a href="#about" class="nav-link"><i class="fa-solid fa-circle-info"></i>About</a>
+          <a href="#plans" class="nav-link"><i class="fa-solid fa-gem"></i>Plans</a>
+          <a href="#instructors" class="nav-link"><i class="fa-solid fa-chalkboard-user"></i>Instructors</a>
+          <a href="#reviews" class="nav-link"><i class="fa-solid fa-star"></i>Reviews</a>
+        </div>
+
+        <div class="nav-controls">
+          <!-- Switch -->
+          <!-- <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            role="switch"
+            aria-checked="false"
+            aria-label="Toggle light and dark mode"
+            title="Toggle light/dark mode"
+          >
+            <span class="theme-track" aria-hidden="true">
+              <span class="theme-icon left"><i class="fa-solid fa-sun"></i></span>
+              <span class="theme-icon right"><i class="fa-solid fa-moon"></i></span>
+              <span class="theme-knob"></span>
+            </span>
+          </button> -->
+
+          <!-- THEME SWITCH (native checkbox + label = most reliable click) -->
+<div class="theme-switch" title="Toggle light/dark mode">
+    <input type="checkbox" id="themeToggle" class="theme-checkbox" aria-label="Toggle light and dark mode">
+    <label for="themeToggle" class="theme-toggle" role="switch" aria-checked="false">
+      <span class="theme-track" aria-hidden="true">
+        <span class="theme-icon left"><i class="fa-solid fa-sun"></i></span>
+        <span class="theme-icon right"><i class="fa-solid fa-moon"></i></span>
+        <span class="theme-knob"></span>
+      </span>
+    </label>
+  </div>
+  
+
+          <button class="icon-btn menu-btn" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+      </div>
+
+      <div class="mobile-panel" id="mobileMenu">
+        <a href="#home" class="nav-link"><i class="fa-solid fa-house"></i>Home</a>
+        <a href="#about" class="nav-link"><i class="fa-solid fa-circle-info"></i>About</a>
+        <a href="#plans" class="nav-link"><i class="fa-solid fa-gem"></i>Plans</a>
+        <a href="#instructors" class="nav-link"><i class="fa-solid fa-chalkboard-user"></i>Instructors</a>
+        <a href="#reviews" class="nav-link"><i class="fa-solid fa-star"></i>Reviews</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page">
+    <!-- centred middle overlay panel -->
+    <div class="content-panel">
+      <section class="hero container" id="home">
+        <h1>Academic Learning, Calm & Modern</h1>
+        <p class="hero-sub">
+          Calm, academic, and modern learning — coding, research, and community.
+        </p>
+
+        <div class="demo-card">
+          Scroll down to confirm background is fixed and text stays readable.
+        </div>
+      </section>
+
+      <section class="container" id="about" style="padding: 70px 0;">
+        <h2>About</h2>
+        <p class="muted">Placeholder section.</p>
+      </section>
+
+      <section class="container" id="plans" style="padding: 70px 0;">
+        <h2>Plans</h2>
+        <p class="muted">Placeholder section.</p>
+      </section>
+
+      <section class="container" id="instructors" style="padding: 70px 0;">
+        <h2>Instructors</h2>
+        <p class="muted">Placeholder section.</p>
+      </section>
+
+      <section class="container" id="reviews" style="padding: 70px 0;">
+        <h2>Reviews</h2>
+        <p class="muted">Placeholder section.</p>
+      </section>
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
