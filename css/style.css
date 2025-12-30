@@ -925,3 +925,135 @@
   }
 }
 
+/* ===== REVIEWS ===== */
+.reviews{ padding: 40px 0 55px; }
+
+.reviews-carousel{
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 48px 1fr 48px;
+  gap: 12px;
+  align-items: center;
+}
+
+.rev-viewport{
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid var(--panel-border);
+  background: rgba(255,255,255,0.40);
+}
+[data-theme="dark"] .rev-viewport{
+  background: rgba(10,14,24,0.45);
+}
+
+.rev-track{
+  display: flex;
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+
+.rev-slide{ min-width: 100%; padding: 14px; }
+
+.rev-card{
+  border-radius: 16px;
+  border: 1px solid var(--panel-border);
+  background: rgba(255,255,255,0.60);
+  padding: 18px;
+}
+[data-theme="dark"] .rev-card{
+  background: rgba(10,14,24,0.60);
+}
+
+.rev-stars{
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.rev-text{
+  margin: 0 0 14px;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.rev-meta{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.rev-pill{
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--panel-border);
+  background: rgba(255,255,255,0.45);
+}
+[data-theme="dark"] .rev-pill{
+  background: rgba(10,14,24,0.55);
+}
+
+/* Nav buttons */
+.rev-nav{
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  border: 1px solid var(--hover-border);
+  background: var(--hover-bg);
+  color: var(--text);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.rev-nav:hover{ filter: brightness(1.03); }
+.rev-nav:disabled{ opacity: 0.4; cursor: not-allowed; }
+
+/* Dots */
+.rev-dots{
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}
+.rev-dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid var(--hover-border);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+.rev-dot.active{
+  background: var(--accent);
+  border-color: transparent;
+}
+
+.rev-footer{
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.rev-more{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  text-decoration: none;
+  font-weight: 800;
+  color: white;
+  background: var(--accent);
+  border: 1px solid rgba(0,0,0,0.10);
+}
+.rev-more:hover{ filter: brightness(1.03); }
+
+@media (max-width: 700px){
+  .reviews-carousel{ grid-template-columns: 42px 1fr 42px; }
+  .rev-nav{ width: 42px; height: 42px; border-radius: 12px; }
+}

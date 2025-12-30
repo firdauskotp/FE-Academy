@@ -486,10 +486,43 @@
       </section>
       
 
-      <section class="container" id="reviews" style="padding: 70px 0;">
-        <h2>Reviews</h2>
-        <p class="muted">Placeholder section.</p>
+      <section class="reviews container" id="reviews">
+        <div class="section-head">
+          <h2>Reviews</h2>
+          <p class="muted">Real feedback from students shown after approval.</p>
+        </div>
+      
+        <div class="reviews-carousel" aria-label="Reviews carousel">
+          <button class="rev-nav rev-prev" type="button" aria-label="Previous review">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+      
+          <div class="rev-viewport">
+            <div class="rev-track" id="revTrack">
+              <div class="rev-slide">
+                <div class="rev-card">
+                  <p class="muted">Loading reviews…</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <button class="rev-nav rev-next" type="button" aria-label="Next review">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      
+        <div class="rev-dots" id="revDots" aria-label="Review pagination"></div>
+      
+        <div class="rev-footer">
+          <a class="rev-more"
+             href="https://docs.google.com/forms/d/e/1FAIpQLSfZURy1AthHPjQC4hzcbY06G5U6cCj7VccDwuHhYUsS6vVK8Q/viewform?usp=publish-editor"
+             target="_blank" rel="noopener">
+            Leave a review <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </div>
       </section>
+      
     </div>
   </main>
 
