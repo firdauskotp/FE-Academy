@@ -10,11 +10,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
 
-  <title>FirdausEisner — Academy</title>
+  <title>FE Academy</title>
   <meta name="description" content="Academic & training website for FirdausEisner — courses, plans, instructors, and reviews.">
   <meta name="theme-color" content="#0b1020">
 
-  <meta property="og:title" content="FirdausEisner — Academy">
+  <meta property="og:title" content="FE Academy">
   <meta property="og:description" content="Academic & training website — plans, instructors, and reviews.">
   <meta property="og:type" content="website">
 
@@ -118,7 +118,7 @@
               FE Academy - Struggling with Programming? Don't worry! Get guidance here!
             </h2>
       
-            <p class="intro-desc">
+            <p class="intro-desc just">
               FE Academy, short for Firdaus Eisner Academy, is a place where we make online classes for students.
               We also offer one to one coaching, access to podcasts, help with projects, and suggest a topic to be taught
               exclusively depending on the plan you chose. 
@@ -133,31 +133,175 @@
       
       
 
-      <section class="container" id="about" style="padding: 70px 0;">
-        <h2>About FE Academy</h2>
-      
-        <p class="muted">
+      <section class="about-full container" id="about" style="padding: 70px 0;">
+        <h2 class="about-title">About FE Academy</h2>
+
+        <h3 class="about-text">
           FE Academy, short for <strong>Firdaus Eisner Academy</strong>, is an online academy established with the purpose
           of teaching programming by two of its founders, Firdaus and Khairi. As the academy grew, we expanded our offerings
           to include a business syllabus with the help of our third founder, Asyraf.
-        </p>
+        </h3>
       
-        <p class="muted">
+        <h3 class="about-text">
           We originally started on Patreon, where our learning plans were first introduced. Today, we continue to offer
           our programmes through Patreon while also sharing our plans and updates via social media and this website.
-        </p>
+        </h3>
       
-        <p class="muted">
+        <h3 class="about-text">
           <strong>Why “Eisner”?</strong> It is a reference to Byleth Eisner, the Fire Emblem hero who is also a teacher — a small
           nod to the idea of guidance, growth, and learning together. ^_^
-        </p>
+        </h3>
       </section>
       
 
-      <section class="container" id="plans" style="padding: 70px 0;">
-        <h2>Plans</h2>
-        <p class="muted">Placeholder section.</p>
+      <section class="plans container" id="plans">
+        <div class="section-head">
+          <h2>Plans</h2>
+          <p class="muted">
+            Choose a plan that matches your pace — from community support to full 1-to-1 coaching.
+          </p>
+        </div>
+      
+        <!-- Quick understanding at first glance -->
+        <div class="how-it-works">
+          <div class="how-card">
+            <i class="fa-solid fa-clipboard-check"></i>
+            <h3>Pick a plan</h3>
+            <p class="muted">Start small or go all-in — you can upgrade any time.</p>
+          </div>
+          <div class="how-card">
+            <i class="fa-solid fa-laptop-code"></i>
+            <h3>Join classes</h3>
+            <p class="muted">Get guided sessions, materials, and recordings (plan dependent).</p>
+          </div>
+          <div class="how-card">
+            <i class="fa-solid fa-comments"></i>
+            <h3>Ask & build</h3>
+            <p class="muted">Get help via Discord Q&A and grow through projects.</p>
+          </div>
+        </div>
+      
+        <!-- Tier Cards -->
+        <div class="plan-grid">
+      
+          <!-- Hello World -->
+          <article class="plan-card">
+            <div class="plan-top">
+              <span class="plan-badge">Starter</span>
+              <h3>Hello World!</h3>
+              <div class="plan-price">
+                <span class="amount">USD 1 (RM 4.05)</span><span class="per">/ month</span>
+              </div>
+            </div>
+            <ul class="plan-features">
+              <li><i class="fa-solid fa-check"></i> Access to Discord community</li>
+              <li><i class="fa-solid fa-check"></i> Stay in the server even if you unsubscribe (unless rules are violated)</li>
+            </ul>
+            <a class="plan-cta" href="https://www.patreon.com/c/firdauseisner/membership" target="_blank" rel="noopener">
+              Join on Patreon <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </article>
+      
+          <!-- Script Kiddie -->
+          <article class="plan-card">
+            <div class="plan-top">
+              <!-- <span class="plan-badge popular">Most popular</span> -->
+              <h3>Script Kiddie</h3>
+              <div class="plan-price">
+                <span class="amount">USD 15 (RM 60.80)</span><span class="per">/ month</span>
+              </div>
+            </div>
+            <ul class="plan-features">
+              <li><i class="fa-solid fa-check"></i> Everything in Hello World</li>
+              <li><i class="fa-solid fa-check"></i> Weekly 1-hour live class (one programme)</li>
+              <li><i class="fa-solid fa-check"></i> Class materials + recordings (for attended classes)</li>
+              <li><i class="fa-solid fa-check"></i> Help catching up via recordings & community</li>
+            </ul>
+            <a class="plan-cta" href="https://www.patreon.com/c/firdauseisner/membership" target="_blank" rel="noopener">
+              Join on Patreon <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </article>
+      
+          <!-- Debugger -->
+          <article class="plan-card">
+            <div class="plan-top">
+              <span class="plan-badge">Level up</span>
+              <h3>Debugger</h3>
+              <div class="plan-price">
+                <span class="amount">USD 25 (RM 101.34)</span><span class="per">/ month</span>
+              </div>
+            </div>
+            <ul class="plan-features">
+              <li><i class="fa-solid fa-check"></i> Everything in previous tiers</li>
+              <li><i class="fa-solid fa-check"></i> Weekly 1-hour live class (two classes)</li>
+              <li><i class="fa-solid fa-check"></i> Higher priority Discord Q&amp;A</li>
+            </ul>
+            <a class="plan-cta" href="https://www.patreon.com/c/firdauseisner/membership" target="_blank" rel="noopener">
+              Join on Patreon <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </article>
+      
+          <!-- Developer / Entrepreneur -->
+          <article class="plan-card">
+            <div class="plan-top">
+              <span class="plan-badge">Builder</span>
+              <h3>Developer / Entrepreneur</h3>
+              <div class="plan-price">
+                <span class="amount">USD 60 (RM 243.21)</span><span class="per">/ month</span>
+              </div>
+            </div>
+            <ul class="plan-features">
+              <li><i class="fa-solid fa-check"></i> Everything in previous tiers</li>
+              <li><i class="fa-solid fa-check"></i> Access to all classes</li>
+              <li><i class="fa-solid fa-check"></i> Tips on building your brand & business</li>
+              <li><i class="fa-solid fa-check"></i> Monthly project ideas</li>
+              <li><i class="fa-solid fa-check"></i> Monthly podcasts with people in the industry</li>
+            </ul>
+            <a class="plan-cta" href="https://www.patreon.com/c/firdauseisner/membership" target="_blank" rel="noopener">
+              Join on Patreon <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </article>
+      
+          <!-- Fullstack -->
+          <article class="plan-card highlight">
+            <div class="plan-top">
+              <span class="plan-badge limited">Limited</span>
+              <h3>Fullstack</h3>
+              <div class="plan-price">
+                <span class="amount">USD 100 (RM 405.35)</span><span class="per">/ month</span>
+              </div>
+            </div>
+            <ul class="plan-features">
+              <li><i class="fa-solid fa-check"></i> Everything in previous tiers</li>
+              <li><i class="fa-solid fa-check"></i> Weekly 2-hour 1-to-1 coaching</li>
+              <li><i class="fa-solid fa-check"></i> Suggest your topic & language (check with the team first)</li>
+              <li><i class="fa-solid fa-check"></i> Highest priority Discord questions</li>
+            </ul>
+            <p class="plan-note muted">
+              Tip: message the trainer team in Discord (or email) before purchasing to confirm your requested topic is manageable.
+            </p>
+            <a class="plan-cta" href="https://www.patreon.com/c/firdauseisner/membership" target="_blank" rel="noopener">
+              Join on Patreon <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+            
+          </article>
+      
+        </div>
+      
+        <!-- Shop (one-time purchases) -->
+        <div class="shop-box">
+          <div class="shop-left">
+            <h3>Prefer one-time purchases?</h3>
+            <p class="muted">
+              You can also buy individual products directly from our Patreon Shop.
+            </p>
+          </div>
+          <a class="shop-cta" href="https://www.patreon.com/c/firdauseisner/shop" target="_blank" rel="noopener">
+            Visit Shop <i class="fa-solid fa-cart-shopping"></i>
+          </a>
+        </div>
       </section>
+      
 
       <section class="container" id="instructors" style="padding: 70px 0;">
         <h2>Instructors</h2>
