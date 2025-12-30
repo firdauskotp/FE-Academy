@@ -84,5 +84,101 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("resize", () => {
       if (window.innerWidth > 860 && isMenuOpen()) closeMenu();
     });
+
+      // ===== YOUTUBE CAROUSEL =====
+  const ytTrack = document.getElementById("ytTrack");
+  const ytDots = document.getElementById("ytDots");
+  const prevBtn = document.querySelector(".yt-prev");
+  const nextBtn = document.querySelector(".yt-next");
+
+  // Put your YouTube VIDEO IDs here (not full links)
+  // Example: https://www.youtube.com/watch?v=VIDEO_ID  -> "VIDEO_ID"
+  const ytVideoIds = [
+    "qgp4ROqcl94",
+    "NgWAdIJv6jM",
+    "Fqeen1QhSUs",
+    "pTkIsrBjwwY",
+    "MxRuGg5i4uA"
+  ];
+
+  let ytIndex = 0;
+
+  function renderYtSlides() {
+    if (!ytTrack || !ytDots) return;
+
+    ytTrack.innerHTML = ytVideoIds.map(id => `
+      <div class="yt-slide">
+        <iframe
+          class="yt-frame"
+          src="https://www.youtube.com/embed/${id}"
+          title="YouTube tutorial"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+    `).join("");
+
+    ytDots.innerHTML = ytVideoIds.map((_, i) => `
+      <button class="yt-dot ${i === 0 ? "active" : ""}" type="button" aria-label="Go to video ${i + 1}"></button>
+    `).join("");
+
+    ytDots.querySelectorAll(".yt-dot").forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        ytIndex = i;
+        updateYtCarousel();
+      });
+    });
+
+    updateYtCarousel();
+  }
+
+  function updateYtCarousel() {
+    if (!ytTrack || !ytDots) return;
+
+    ytTrack.style.transform = `translateX(-${ytIndex * 100}%)`;
+
+    const dots = ytDots.querySelectorAll(".yt-dot");
+    dots.forEach((d, i) => d.classList.toggle("active", i === ytIndex));
+
+    if (prevBtn) prevBtn.disabled = ytIndex === 0;
+    if (nextBtn) nextBtn.disabled = ytIndex === ytVideoIds.length - 1;
+  }
+
+  if (prevBtn) prevBtn.addEventListener("click", () => {
+    ytIndex = Math.max(0, ytIndex - 1);
+    updateYtCarousel();
+  });
+
+  if (nextBtn) nextBtn.addEventListener("click", () => {
+    ytIndex = Math.min(ytVideoIds.length - 1, ytIndex + 1);
+    updateYtCarousel();
+  });
+
+  // Optional: swipe support on mobile
+  let startX = null;
+  const viewport = document.querySelector(".yt-viewport");
+  if (viewport) {
+    viewport.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    viewport.addEventListener("touchend", (e) => {
+      if (startX === null) return;
+      const endX = e.changedTouches[0].clientX;
+      const dx = endX - startX;
+
+      if (dx > 50) { // swipe right
+        ytIndex = Math.max(0, ytIndex - 1);
+        updateYtCarousel();
+      } else if (dx < -50) { // swipe left
+        ytIndex = Math.min(ytVideoIds.length - 1, ytIndex + 1);
+        updateYtCarousel();
+      }
+      startX = null;
+    }, { passive: true });
+  }
+
+  renderYtSlides();
+
   });
   
