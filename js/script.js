@@ -182,271 +182,240 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ===== REVIEWS (Google Sheets CSV -> Carousel + Auto-slide) =====
 const REVIEWS_CSV_URL =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vQvmN-is89yUxisJX_lAg61zqU2_dN6Y6S7aNS-ZQFq-qKW2MOGQOOhynNMyJ6LWkvkIIIC1B3WrDRH/pub?gid=1253076960&single=true&output=csv";
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQvmN-is89yUxisJX_lAg61zqU2_dN6Y6S7aNS-ZQFq-qKW2MOGQOOhynNMyJ6LWkvkIIIC1B3WrDRH/pub?gid=1253076960&single=true&output=csv";
 
-const revTrack = document.getElementById("revTrack");
-const revDots = document.getElementById("revDots");
-const revPrev = document.querySelector(".rev-prev");
-const revNext = document.querySelector(".rev-next");
-const revViewport = document.querySelector(".rev-viewport");
+  const revTrack = document.getElementById("revTrack");
+  const revDots = document.getElementById("revDots");
+  const revPrev = document.querySelector(".rev-prev");
+  const revNext = document.querySelector(".rev-next");
+  const revViewport = document.querySelector(".rev-viewport");
 
-let revIndex = 0;
-let reviews = [];
-
-// Auto-slide every 5 seconds
-let autoTimer = null;
-const AUTO_MS = 5000;
-
-function escapeHtml(str) {
-return String(str ?? "")
-  .replaceAll("&", "&amp;")
-  .replaceAll("<", "&lt;")
-  .replaceAll(">", "&gt;")
-  .replaceAll('"', "&quot;")
-  .replaceAll("'", "&#039;");
-}
-
-// Simple CSV parser (handles quoted commas)
-function parseCSV(text) {
-const rows = [];
-let row = [];
-let cur = "";
-let inQuotes = false;
-
-for (let i = 0; i < text.length; i++) {
-  const ch = text[i];
-  const next = text[i + 1];
-
-  // Escaped quotes inside quoted field
-  if (ch === '"' && inQuotes && next === '"') {
-    cur += '"';
-    i++;
-    continue;
-  }
-
-  // Toggle quotes
-  if (ch === '"') {
-    inQuotes = !inQuotes;
-    continue;
-  }
-
-  // Column split
-  if (ch === "," && !inQuotes) {
-    row.push(cur);
-    cur = "";
-    continue;
-  }
-
-  // Row split
-  if ((ch === "\n" || ch === "\r") && !inQuotes) {
-    if (ch === "\r" && next === "\n") i++;
-    row.push(cur);
-
-    if (row.some(cell => cell.trim() !== "")) rows.push(row);
-    row = [];
-    cur = "";
-    continue;
-  }
-
-  cur += ch;
-}
-
-// Last cell
-row.push(cur);
-if (row.some(cell => cell.trim() !== "")) rows.push(row);
-
-return rows;
-}
-
-function starHtml(rating) {
-const r = Math.max(0, Math.min(5, Number(rating) || 0));
-let html = "";
-for (let i = 1; i <= 5; i++) {
-  html += i <= r
-    ? '<i class="fa-solid fa-star"></i>'
-    : '<i class="fa-regular fa-star"></i>';
-}
-return html;
-}
-
-function updateReviews() {
-if (!revTrack || !revDots) return;
-
-revTrack.style.transform = `translateX(-${revIndex * 100}%)`;
-
-const dots = revDots.querySelectorAll(".rev-dot");
-dots.forEach((d, i) => d.classList.toggle("active", i === revIndex));
-
-if (revPrev) revPrev.disabled = revIndex === 0;
-if (revNext) revNext.disabled = revIndex === reviews.length - 1;
-}
-
-function startAutoSlide() {
-if (autoTimer) clearInterval(autoTimer);
-if (!reviews.length) return;
-
-autoTimer = setInterval(() => {
-  revIndex = (revIndex + 1) % reviews.length;
-  updateReviews();
-}, AUTO_MS);
-}
-
-function renderReviews() {
-if (!revTrack || !revDots) return;
-
-if (!reviews.length) {
-  revTrack.innerHTML = `
-    <div class="rev-slide">
-      <div class="rev-card">
-        <p class="muted">No approved reviews yet. Be the first to leave one!</p>
-      </div>
-    </div>`;
-  revDots.innerHTML = "";
-  if (revPrev) revPrev.disabled = true;
-  if (revNext) revNext.disabled = true;
-  if (autoTimer) clearInterval(autoTimer);
-  return;
-}
-
-revTrack.innerHTML = reviews.map(r => `
-  <div class="rev-slide">
-    <div class="rev-card">
-      <div class="rev-stars">${starHtml(r.rating)}</div>
-      <p class="rev-text">"${escapeHtml(r.help)}"</p>
-      <div class="rev-meta">
-        <span class="rev-pill">
-          <i class="fa-solid fa-user"></i> ${escapeHtml(r.name)}
-        </span>
-        <span class="rev-pill">
-          <i class="fa-solid fa-layer-group"></i> ${escapeHtml(r.plan)}
-        </span>
-      </div>
-    </div>
-  </div>
-`).join("");
-
-revDots.innerHTML = reviews.map((_, i) => `
-  <button class="rev-dot ${i === 0 ? "active" : ""}"
-          type="button"
-          aria-label="Go to review ${i + 1}">
-  </button>
-`).join("");
-
-revDots.querySelectorAll(".rev-dot").forEach((dot, i) => {
-  dot.addEventListener("click", () => {
-    revIndex = i;
-    updateReviews();
-    startAutoSlide(); // restart timer after manual navigation
-  });
-});
-
-revIndex = 0;
-updateReviews();
-startAutoSlide();
-}
-
-// Button navigation
-if (revPrev) {
-revPrev.addEventListener("click", () => {
-  revIndex = Math.max(0, revIndex - 1);
-  updateReviews();
-  startAutoSlide();
-});
-}
-
-if (revNext) {
-revNext.addEventListener("click", () => {
-  revIndex = Math.min(reviews.length - 1, revIndex + 1);
-  updateReviews();
-  startAutoSlide();
-});
-}
-
-// Pause on hover (desktop)
-if (revViewport) {
-revViewport.addEventListener("mouseenter", () => {
-  if (autoTimer) clearInterval(autoTimer);
-});
-revViewport.addEventListener("mouseleave", () => {
-  startAutoSlide();
-});
-}
-
-// Swipe support (mobile)
-let startX2 = null;
-
-if (revViewport) {
-revViewport.addEventListener("touchstart", (e) => {
-  startX2 = e.touches[0].clientX;
-}, { passive: true });
-
-revViewport.addEventListener("touchend", (e) => {
-  if (startX2 === null) return;
-  const dx = e.changedTouches[0].clientX - startX2;
-
-  if (dx > 50) {
-    revIndex = Math.max(0, revIndex - 1);
-    updateReviews();
-    startAutoSlide();
-  } else if (dx < -50) {
-    revIndex = Math.min(reviews.length - 1, revIndex + 1);
-    updateReviews();
-    startAutoSlide();
-  }
-
-  startX2 = null;
-}, { passive: true });
-}
-
-async function loadReviews() {
-try {
-  const res = await fetch(REVIEWS_CSV_URL, { cache: "no-store" });
-  if (!res.ok) throw new Error("Failed to fetch reviews CSV");
-
-  const csv = await res.text();
-  const rows = parseCSV(csv);
-
-  if (rows.length < 2) {
-    reviews = [];
-    renderReviews();
+  if (!revTrack || !revDots || !revPrev || !revNext || !revViewport) {
+    console.warn("[Reviews] Missing carousel elements. Check IDs/classes in HTML.", {
+      revTrack, revDots, revPrev, revNext, revViewport
+    });
     return;
   }
 
-  // Expected header row from your PublicReviews:
-  // Name, Plan, Rating / 5, How did the plan help you and what did you gain
-  const header = rows[0].map(h => h.trim().toLowerCase());
+  let revIndex = 0;
+  let reviews = [];
 
-  const idxName = header.indexOf("name");
-  const idxPlan = header.indexOf("plan");
-  const idxRating = header.findIndex(h => h.includes("rating"));
-  const idxHelp = header.findIndex(h => h.includes("how did the plan help"));
+  // Auto-slide every 5 seconds
+  let autoTimer = null;
+  const AUTO_MS = 5000;
 
-  reviews = rows.slice(1)
-    .map(r => ({
-      name: r[idxName] ?? "",
-      plan: r[idxPlan] ?? "",
-      rating: r[idxRating] ?? "",
-      help: r[idxHelp] ?? ""
-    }))
-    .filter(r => r.name && r.plan && r.rating && r.help);
+  function escapeHtml(str) {
+    return String(str ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
 
-  renderReviews();
-} catch (err) {
-  console.error(err);
-  if (revTrack) {
-    revTrack.innerHTML = `
+  // CSV parser (handles quoted commas)
+  function parseCSV(text) {
+    const rows = [];
+    let row = [];
+    let cur = "";
+    let inQuotes = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      const next = text[i + 1];
+
+      if (ch === '"' && inQuotes && next === '"') { cur += '"'; i++; continue; }
+      if (ch === '"') { inQuotes = !inQuotes; continue; }
+
+      if (ch === "," && !inQuotes) { row.push(cur); cur = ""; continue; }
+
+      if ((ch === "\n" || ch === "\r") && !inQuotes) {
+        if (ch === "\r" && next === "\n") i++;
+        row.push(cur);
+        if (row.some(cell => cell.trim() !== "")) rows.push(row);
+        row = [];
+        cur = "";
+        continue;
+      }
+      cur += ch;
+    }
+
+    row.push(cur);
+    if (row.some(cell => cell.trim() !== "")) rows.push(row);
+    return rows;
+  }
+
+  function starHtml(rating) {
+    const r = Math.max(0, Math.min(5, Number(rating) || 0));
+    let html = "";
+    for (let i = 1; i <= 5; i++) {
+      html += i <= r ? '<i class="fa-solid fa-star"></i>' : '<i class="fa-regular fa-star"></i>';
+    }
+    return html;
+  }
+
+  function updateReviews() {
+    revTrack.style.transform = `translateX(-${revIndex * 100}%)`;
+
+    const dots = revDots.querySelectorAll(".rev-dot");
+    dots.forEach((d, i) => d.classList.toggle("active", i === revIndex));
+
+    revPrev.disabled = revIndex === 0;
+    revNext.disabled = revIndex === reviews.length - 1;
+  }
+
+  function startAutoSlide() {
+    if (autoTimer) clearInterval(autoTimer);
+    if (!reviews.length) return;
+
+    autoTimer = setInterval(() => {
+      revIndex = (revIndex + 1) % reviews.length;
+      updateReviews();
+    }, AUTO_MS);
+  }
+
+  function renderReviews() {
+    if (!reviews.length) {
+      revTrack.innerHTML = `
+        <div class="rev-slide">
+          <div class="rev-card">
+            <p class="muted">No approved reviews yet. Be the first to leave one!</p>
+          </div>
+        </div>`;
+      revDots.innerHTML = "";
+      revPrev.disabled = true;
+      revNext.disabled = true;
+      if (autoTimer) clearInterval(autoTimer);
+      return;
+    }
+
+    revTrack.innerHTML = reviews.map(r => `
       <div class="rev-slide">
         <div class="rev-card">
-          <p class="muted">Could not load reviews right now.</p>
+          <div class="rev-stars">${starHtml(r.rating)}</div>
+          <p class="rev-text">"${escapeHtml(r.help)}"</p>
+          <div class="rev-meta">
+            <span class="rev-pill"><i class="fa-solid fa-user"></i> ${escapeHtml(r.name)}</span>
+            <span class="rev-pill"><i class="fa-solid fa-layer-group"></i> ${escapeHtml(r.plan)}</span>
+          </div>
         </div>
-      </div>`;
+      </div>
+    `).join("");
+
+    revDots.innerHTML = reviews.map((_, i) => `
+      <button class="rev-dot ${i === 0 ? "active" : ""}" type="button" aria-label="Go to review ${i + 1}"></button>
+    `).join("");
+
+    revDots.querySelectorAll(".rev-dot").forEach((dot, i) => {
+      dot.addEventListener("click", () => {
+        revIndex = i;
+        updateReviews();
+        startAutoSlide();
+      });
+    });
+
+    revIndex = 0;
+    updateReviews();
+    startAutoSlide();
   }
-  if (autoTimer) clearInterval(autoTimer);
-}
-}
 
-loadReviews();
+  // Buttons
+  revPrev.addEventListener("click", () => {
+    revIndex = Math.max(0, revIndex - 1);
+    updateReviews();
+    startAutoSlide();
+  });
 
+  revNext.addEventListener("click", () => {
+    revIndex = Math.min(reviews.length - 1, revIndex + 1);
+    updateReviews();
+    startAutoSlide();
+  });
+
+  // Pause on hover (desktop)
+  revViewport.addEventListener("mouseenter", () => autoTimer && clearInterval(autoTimer));
+  revViewport.addEventListener("mouseleave", () => startAutoSlide());
+
+  // Swipe support (mobile)
+  let startX2 = null;
+  revViewport.addEventListener("touchstart", (e) => { startX2 = e.touches[0].clientX; }, { passive: true });
+  revViewport.addEventListener("touchend", (e) => {
+    if (startX2 === null) return;
+    const dx = e.changedTouches[0].clientX - startX2;
+    if (dx > 50) { revIndex = Math.max(0, revIndex - 1); updateReviews(); startAutoSlide(); }
+    else if (dx < -50) { revIndex = Math.min(reviews.length - 1, revIndex + 1); updateReviews(); startAutoSlide(); }
+    startX2 = null;
+  }, { passive: true });
+
+  async function loadReviews() {
+    try {
+      const res = await fetch(REVIEWS_CSV_URL, { cache: "no-store" });
+      if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+
+      const csv = await res.text();
+      const rows = parseCSV(csv);
+
+      console.log("[Reviews] Rows fetched:", rows.length);
+
+      if (rows.length < 2) {
+        reviews = [];
+        renderReviews();
+        return;
+      }
+
+      // Clean headers (strip BOM)
+      const header = rows[0].map(h =>
+        String(h ?? "").replace(/^\uFEFF/, "").trim().toLowerCase()
+      );
+
+      console.log("[Reviews] Headers:", header);
+
+      // Flexible header matching
+      const idxName = header.findIndex(h => h === "name");
+      const idxPlan = header.findIndex(h => h.includes("plan"));
+      const idxRating = header.findIndex(h => h.includes("rating"));
+      const idxHelp = header.findIndex(h => h.includes("how did") || h.includes("help you") || h.includes("gain"));
+
+      // Fallback to fixed positions if headers don't match:
+      // PublicReviews output order should be: Name, Plan, Rating, HelpText
+      const fallback = {
+        name: 0,
+        plan: 1,
+        rating: 2,
+        help: 3
+      };
+
+      const useIdx = {
+        name: idxName !== -1 ? idxName : fallback.name,
+        plan: idxPlan !== -1 ? idxPlan : fallback.plan,
+        rating: idxRating !== -1 ? idxRating : fallback.rating,
+        help: idxHelp !== -1 ? idxHelp : fallback.help
+      };
+
+      reviews = rows.slice(1).map(r => ({
+        name: (r[useIdx.name] ?? "").trim(),
+        plan: (r[useIdx.plan] ?? "").trim(),
+        rating: (r[useIdx.rating] ?? "").trim(),
+        help: (r[useIdx.help] ?? "").trim(),
+      }))
+      .filter(r => r.name && r.plan && r.rating && r.help);
+
+      console.log("[Reviews] Parsed reviews:", reviews.length);
+
+      renderReviews();
+    } catch (err) {
+      console.error("[Reviews] Error:", err);
+      revTrack.innerHTML = `
+        <div class="rev-slide">
+          <div class="rev-card">
+            <p class="muted">Could not load reviews right now.</p>
+          </div>
+        </div>`;
+      if (autoTimer) clearInterval(autoTimer);
+    }
+  }
+
+  loadReviews();
 
   });
   
