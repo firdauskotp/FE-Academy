@@ -1,4 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // ===== FE ACADEMY REGISTRATION FORM =====
+    // After running FE_Academy_Registration_Setup.gs, paste the responder URL here.
+    // Paste the public responder URL from the Setup sheet below. All registration buttons use this same form.
+    const REGISTRATION_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfBpWzyEipGyVawvFbktwec7U2Hjk8Sd3cN3kKuw0F1RQdW_A/viewform";
+
+    document.querySelectorAll("[data-registration-link]").forEach((link) => {
+      if (REGISTRATION_FORM_URL) {
+        link.href = REGISTRATION_FORM_URL;
+        link.target = "_blank";
+        link.rel = "noopener";
+        return;
+      }
+
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        window.alert("The registration form link has not been connected yet. Paste the Google Form responder URL into REGISTRATION_FORM_URL in js/script.js.");
+      });
+    });
+
     // ===== ELEMENTS =====
     const root = document.documentElement;
   
@@ -179,6 +198,96 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   renderYtSlides();
+
+  // ===== PUBLIC PLAN & SESSION COUNTS =====
+  // Default local file. After creating the Google Sheet, publish only the
+  // Public Counts tab as CSV and paste that URL below.
+  const PLAN_COUNTS_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1rMvnBc1S2S2VHhjRJzNXocvolCqdIebaLbqXVgGY0V9qELiA9xMKaYqCr0B0boQHwtcJc_0oXXnA/pub?gid=1768616794&single=true&output=csv";
+
+  function parseSimpleCSV(text) {
+    const rows = [];
+    let row = [];
+    let cell = "";
+    let quoted = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      const next = text[i + 1];
+
+      if (char === '"' && quoted && next === '"') {
+        cell += '"';
+        i++;
+      } else if (char === '"') {
+        quoted = !quoted;
+      } else if (char === "," && !quoted) {
+        row.push(cell.trim());
+        cell = "";
+      } else if ((char === "\n" || char === "\r") && !quoted) {
+        if (char === "\r" && next === "\n") i++;
+        row.push(cell.trim());
+        if (row.some(value => value !== "")) rows.push(row);
+        row = [];
+        cell = "";
+      } else {
+        cell += char;
+      }
+    }
+
+    row.push(cell.trim());
+    if (row.some(value => value !== "")) rows.push(row);
+    return rows;
+  }
+
+  async function loadPlanCounts() {
+    const countElements = document.querySelectorAll("[data-plan-count]");
+    if (!countElements.length || !PLAN_COUNTS_CSV_URL) return;
+
+    try {
+      const response = await fetch(PLAN_COUNTS_CSV_URL, { cache: "no-store" });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const rows = parseSimpleCSV(await response.text());
+      if (rows.length < 2) return;
+
+      const headers = rows[0].map(value => value.toLowerCase().trim());
+      const keyIndex = headers.includes("key") ? headers.indexOf("key") : headers.indexOf("plan");
+      const countIndex = headers.indexOf("count");
+      const singularIndex = headers.indexOf("singular");
+      const pluralIndex = headers.indexOf("plural");
+      if (keyIndex === -1 || countIndex === -1) return;
+
+      const counts = new Map();
+      rows.slice(1).forEach(row => {
+        const key = (row[keyIndex] || "").toLowerCase().trim();
+        const rawCount = (row[countIndex] || "").trim();
+        if (!key || rawCount === "") return;
+
+        const count = Number.parseInt(rawCount, 10);
+        if (!Number.isFinite(count) || count < 0) return;
+
+        counts.set(key, {
+          count,
+          singular: singularIndex >= 0 ? (row[singularIndex] || "item") : "learner enrolled",
+          plural: pluralIndex >= 0 ? (row[pluralIndex] || "items") : "learners enrolled"
+        });
+      });
+
+      countElements.forEach(element => {
+        const key = element.dataset.planCount;
+        if (!counts.has(key)) return;
+
+        const entry = counts.get(key);
+        const label = entry.count === 1 ? entry.singular : entry.plural;
+        const text = element.querySelector("span");
+        if (text) text.textContent = `${entry.count} ${label}`;
+        element.classList.add("has-count");
+      });
+    } catch (error) {
+      console.info("[Counts] Public counts are not available yet.", error);
+    }
+  }
+
+  loadPlanCounts();
 
   // ===== REVIEWS (Google Sheets CSV -> Carousel + Auto-slide) =====
 const REVIEWS_CSV_URL =

@@ -1,30 +1,25 @@
 <!doctype html>
 <html lang="en" data-theme="light">
 <head>
-  <!-- Readable cursive font -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&display=swap" rel="stylesheet">
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
 
-  <title>FE Academy</title>
-  <meta name="description" content="Academic & training website for FirdausEisner — courses, plans, instructors, and reviews.">
+  <title>FE Academy | Programming, Technology & Business Classes</title>
+  <meta name="description" content="FE Academy offers friendly online classes in programming, technology, electronics and Power BI for learners of all ages and backgrounds.">
   <meta name="theme-color" content="#0b1020">
 
   <meta property="og:title" content="FE Academy">
-  <meta property="og:description" content="Academic & training website — plans, instructors, and reviews.">
+  <meta property="og:description" content="Programming, technology and business learning for beginners, students and working adults.">
   <meta property="og:type" content="website">
 
-  <!-- Use title image as site icon -->
   <link rel="icon" href="img/title.jpg">
   <link rel="apple-touch-icon" href="img/title.jpg">
-
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -32,7 +27,6 @@
   <header class="navbar-wrap" id="siteHeader">
     <nav class="navbar" aria-label="Primary">
       <div class="nav-inner">
-
         <a href="#home" class="brand">
           <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
           <span>FirdausEisner</span>
@@ -41,55 +35,38 @@
         <div class="nav-links" aria-label="Site">
           <a href="#home" class="nav-link"><i class="fa-solid fa-house"></i>Home</a>
           <a href="#about" class="nav-link"><i class="fa-solid fa-circle-info"></i>About</a>
+          <a href="#syllabus" class="nav-link"><i class="fa-solid fa-book-open"></i>Programmes</a>
           <a href="#plans" class="nav-link"><i class="fa-solid fa-gem"></i>Plans</a>
-          <a href="#instructors" class="nav-link"><i class="fa-solid fa-chalkboard-user"></i>Instructors</a>
-          <a href="#tutorials" class="nav-link"><i class="fa-brands fa-youtube"></i>Tutorials</a>
+          <a href="#extra-classes" class="nav-link"><i class="fa-solid fa-clock"></i>Extra Classes</a>
+          <a href="#instructors" class="nav-link"><i class="fa-solid fa-chalkboard-user"></i>Team</a>
           <a href="#reviews" class="nav-link"><i class="fa-solid fa-star"></i>Reviews</a>
         </div>
 
         <div class="nav-controls">
-          <!-- Switch -->
-          <!-- <button
-            class="theme-toggle"
-            id="themeToggle"
-            type="button"
-            role="switch"
-            aria-checked="false"
-            aria-label="Toggle light and dark mode"
-            title="Toggle light/dark mode"
-          >
-            <span class="theme-track" aria-hidden="true">
-              <span class="theme-icon left"><i class="fa-solid fa-sun"></i></span>
-              <span class="theme-icon right"><i class="fa-solid fa-moon"></i></span>
-              <span class="theme-knob"></span>
-            </span>
-          </button> -->
-
-          <!-- THEME SWITCH (native checkbox + label = most reliable click) -->
-<div class="theme-switch" title="Toggle light/dark mode">
-    <input type="checkbox" id="themeToggle" class="theme-checkbox" aria-label="Toggle light and dark mode">
-    <label for="themeToggle" class="theme-toggle" role="switch" aria-checked="false">
-      <span class="theme-track" aria-hidden="true">
-        <span class="theme-icon left"><i class="fa-solid fa-sun"></i></span>
-        <span class="theme-icon right"><i class="fa-solid fa-moon"></i></span>
-        <span class="theme-knob"></span>
-      </span>
-    </label>
-  </div>
-  
+          <div class="theme-switch" title="Toggle light/dark mode">
+            <input type="checkbox" id="themeToggle" class="theme-checkbox" aria-label="Toggle light and dark mode">
+            <label for="themeToggle" class="theme-toggle" role="switch" aria-checked="false">
+              <span class="theme-track" aria-hidden="true">
+                <span class="theme-icon left"><i class="fa-solid fa-sun"></i></span>
+                <span class="theme-icon right"><i class="fa-solid fa-moon"></i></span>
+                <span class="theme-knob"></span>
+              </span>
+            </label>
+          </div>
 
           <button class="icon-btn menu-btn" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
             <i class="fa-solid fa-bars"></i>
           </button>
         </div>
-
       </div>
 
       <div class="mobile-panel" id="mobileMenu">
         <a href="#home" class="nav-link"><i class="fa-solid fa-house"></i>Home</a>
         <a href="#about" class="nav-link"><i class="fa-solid fa-circle-info"></i>About</a>
+        <a href="#syllabus" class="nav-link"><i class="fa-solid fa-book-open"></i>Programmes</a>
         <a href="#plans" class="nav-link"><i class="fa-solid fa-gem"></i>Plans</a>
-        <a href="#instructors" class="nav-link"><i class="fa-solid fa-chalkboard-user"></i>Instructors</a>
+        <a href="#extra-classes" class="nav-link"><i class="fa-solid fa-clock"></i>Extra Classes</a>
+        <a href="#instructors" class="nav-link"><i class="fa-solid fa-chalkboard-user"></i>Team</a>
         <a href="#tutorials" class="nav-link"><i class="fa-brands fa-youtube"></i>Tutorials</a>
         <a href="#reviews" class="nav-link"><i class="fa-solid fa-star"></i>Reviews</a>
       </div>
@@ -97,213 +74,466 @@
   </header>
 
   <main class="page">
-    <!-- centred middle overlay panel -->
     <div class="content-panel">
       <section class="intro container" id="home">
-
-        <!-- Cursive welcome ABOVE everything -->
         <div class="welcome-wrap">
-          <p class="welcome-line">Welcome Students to</p>
+          <p class="welcome-line">Welcome to</p>
           <p class="welcome-line welcome-academy">FE Academy</p>
         </div>
-      
+
         <div class="intro-grid">
-      
-          <!-- Left: image -->
           <div class="intro-left">
-            <img class="intro-image" src="img/title.jpg" alt="FE Academy Brand Logo">
+            <img class="intro-image" src="img/title.jpg" alt="FE Academy brand logo">
           </div>
-      
-          <!-- Right: text -->
+
           <div class="intro-right">
-            <h2 class="intro-title">
-              FE Academy - Struggling with Programming? Don't worry! Get guidance here!
-            </h2>
-      
+            <p class="eyebrow">Learn at your own pace, with real guidance</p>
+            <h1 class="intro-title">Programming, technology and business classes for everyone.</h1>
             <p class="intro-desc just">
-              FE Academy, short for Firdaus Eisner Academy (KT0605076-P), is a place where we make online classes for students.
-              We also offer one to one coaching, access to podcasts, help with projects, and suggest a topic to be taught
-              exclusively depending on the plan you chose. 
-              
-              <strong>As of now, we are teaching programming languages such as Python, HTML and also programming involved with electronics.</strong>
-              <strong>Our full syllabus will be on our <a href="https://www.patreon.com/c/firdauseisner/posts" target="_blank">Patreon!</a></strong>
+              FE Academy, short for <strong>Firdaus Eisner Academy (KT0605076-P)</strong>, provides friendly online learning for
+              children, teenagers, university students, working adults and complete beginners. Our classes cover programming,
+              web development, electronics, creative computing and business data skills. You can follow a structured course,
+              request extra lessons, or get guidance for projects, competitions and technical challenges.
             </p>
+
+            <div class="audience-chips" aria-label="Who can join">
+              <span><i class="fa-solid fa-child-reaching"></i> Young learners</span>
+              <span><i class="fa-solid fa-user-graduate"></i> Students</span>
+              <span><i class="fa-solid fa-briefcase"></i> Working adults</span>
+              <span><i class="fa-solid fa-seedling"></i> Beginners welcome</span>
+            </div>
+
+            <div class="hero-actions">
+              <a class="primary-action" href="#syllabus">Explore the programmes <i class="fa-solid fa-arrow-down"></i></a>
+              <a class="secondary-action" data-registration-link href="#registration-form">Open registration form <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
           </div>
-      
         </div>
       </section>
-      
-      
 
-      <section class="about-full container" id="about" style="padding: 70px 0;">
-        <h2 class="about-title">About FE Academy</h2>
+      <section class="about-full container" id="about">
+        <div class="section-head">
+          <p class="eyebrow">Our learning approach</p>
+          <h2 class="about-title">About FE Academy</h2>
+        </div>
 
-        <h3 class="about-text">
-          FE Academy, short for <strong>Firdaus Eisner Academy</strong>, is an online academy established with the purpose
-          of teaching programming by two of its founders, Firdaus and Khairi. As the academy grew, we expanded our offerings
-          to include a business syllabus with the help of our third founder, Asyraf.
-        </h3>
-      
-        <h3 class="about-text">
-          We originally started on Patreon, where our learning plans were first introduced. Today, we continue to offer
-          our programmes through Patreon while also sharing our plans and updates via social media and this website.
-        </h3>
-      
-        <h3 class="about-text">
-          <strong>Why “Eisner”?</strong> It is a reference to Byleth Eisner, the Fire Emblem hero who is also a teacher — a small
-          nod to the idea of guidance, growth, and learning together. ^_^
-        </h3>
+        <p class="about-text">
+          FE Academy was established to make programming and technology easier to understand through guided practice,
+          patient explanations and practical projects. It was founded by Firdaus and Khairi, and later expanded into
+          business and data learning with Asyraf.
+        </p>
+
+        <p class="about-text">
+          Classes are open to learners of all ages and backgrounds. Most monthly-plan classes are conducted in groups.
+          When only one learner joins a scheduled class, the class can continue as an individual session at the same
+          monthly plan price, subject to trainer availability.
+        </p>
+
+        <p class="about-text">
+          <strong>Why “Eisner”?</strong> It is a reference to Byleth Eisner, the Fire Emblem hero who is also a teacher —
+          a small nod to guidance, growth and learning together. ^_^
+        </p>
       </section>
-      
+
+      <section class="syllabus container" id="syllabus">
+        <div class="section-head">
+          <p class="eyebrow">Structured three-month programmes</p>
+          <h2>Programme Syllabuses</h2>
+          <p class="muted">Each beginner programme runs for an average of 12 weeks. Monthly assessments help learners review their progress, and the final month ends with a practical project and assessment.</p>
+        </div>
+
+        <div class="syllabus-note">
+          <i class="fa-solid fa-circle-info"></i>
+          <p>Courses can be adjusted to suit the learner's age, experience and learning speed. Some programmes require suitable software or hardware.</p>
+        </div>
+
+        <div class="course-grid">
+          <details class="course-card" open>
+            <summary>
+              <span class="course-icon"><i class="fa-brands fa-python"></i></span>
+              <span class="course-heading"><strong>Python Beginner</strong><small>Programming fundamentals and a final project</small></span>
+              <span class="course-meta">12 weeks</span>
+              <i class="fa-solid fa-chevron-down course-chevron"></i>
+            </summary>
+            <div class="course-content">
+              <div class="month-block">
+                <h3>Month 1 · Foundations</h3>
+                <ol class="week-list">
+                  <li><strong>Week 1:</strong> Introduction to programming, installing and using IDLE, comments, <code>print()</code> and basic syntax.</li>
+                  <li><strong>Week 2:</strong> Variables, naming conventions, data types, <code>input()</code> and type conversion.</li>
+                  <li><strong>Week 3:</strong> <code>if</code>, <code>elif</code> and <code>else</code>, comparison operators, logical operators and decisions using variables.</li>
+                  <li><strong>Week 4:</strong> Month 1 assessment and a small decision-making programme.</li>
+                </ol>
+              </div>
+              <div class="month-block">
+                <h3>Month 2 · Building Logic</h3>
+                <ol class="week-list" start="5">
+                  <li><strong>Week 5:</strong> Nested conditionals, input validation and debugging common logic errors.</li>
+                  <li><strong>Week 6:</strong> Functions, parameters, arguments, return values and reusable code.</li>
+                  <li><strong>Week 7:</strong> <code>for</code> and <code>while</code> loops, <code>range()</code>, counters and repetition.</li>
+                  <li><strong>Week 8:</strong> Month 2 assessment with functions, loops and debugging tasks.</li>
+                </ol>
+              </div>
+              <div class="month-block">
+                <h3>Month 3 · Data and Project</h3>
+                <ol class="week-list" start="9">
+                  <li><strong>Week 9:</strong> Lists, indexes, adding/removing items and looping through stored data.</li>
+                  <li><strong>Week 10:</strong> Beginner libraries including <code>math</code> and <code>random</code>.</li>
+                  <li><strong>Week 11:</strong> Final project planning and development with trainer feedback.</li>
+                  <li><strong>Week 12:</strong> Project presentation, final assessment, review and next-step recommendations.</li>
+                </ol>
+              </div>
+            </div>
+          </details>
+
+          <details class="course-card">
+            <summary>
+              <span class="course-icon"><i class="fa-brands fa-html5"></i></span>
+              <span class="course-heading"><strong>HTML Foundations</strong><small>Build well-structured multi-page websites</small></span>
+              <span class="course-meta">12 weeks</span>
+              <i class="fa-solid fa-chevron-down course-chevron"></i>
+            </summary>
+            <div class="course-content">
+              <div class="month-block">
+                <h3>Month 1 · Web Page Basics</h3>
+                <ol class="week-list">
+                  <li><strong>Week 1:</strong> How websites work, code editor setup, file organisation and the HTML document structure.</li>
+                  <li><strong>Week 2:</strong> Headings, paragraphs, text emphasis, line breaks, comments and clean indentation.</li>
+                  <li><strong>Week 3:</strong> Links, file paths, images, alternative text and navigation between pages.</li>
+                  <li><strong>Week 4:</strong> Month 1 assessment: create a personal profile web page.</li>
+                </ol>
+              </div>
+              <div class="month-block">
+                <h3>Month 2 · Useful Page Elements</h3>
+                <ol class="week-list" start="5">
+                  <li><strong>Week 5:</strong> Ordered lists, unordered lists and structured information.</li>
+                  <li><strong>Week 6:</strong> Tables, captions, headings and accessible data presentation.</li>
+                  <li><strong>Week 7:</strong> Forms, labels, text fields, radio buttons, checkboxes and buttons.</li>
+                  <li><strong>Week 8:</strong> Month 2 assessment: build a small multi-page information website.</li>
+                </ol>
+              </div>
+              <div class="month-block">
+                <h3>Month 3 · Complete Website</h3>
+                <ol class="week-list" start="9">
+                  <li><strong>Week 9:</strong> Semantic elements such as header, nav, main, section, article and footer.</li>
+                  <li><strong>Week 10:</strong> Audio, video, embeds, accessibility and responsible use of online media.</li>
+                  <li><strong>Week 11:</strong> Final website planning and development.</li>
+                  <li><strong>Week 12:</strong> Testing links, final assessment, presentation and basic publishing guidance.</li>
+                </ol>
+              </div>
+            </div>
+          </details>
+
+          <details class="course-card">
+            <summary>
+              <span class="course-icon"><i class="fa-brands fa-css3-alt"></i></span>
+              <span class="course-heading"><strong>CSS Foundations</strong><small>Style responsive and attractive websites</small></span>
+              <span class="course-meta">12 weeks</span>
+              <i class="fa-solid fa-chevron-down course-chevron"></i>
+            </summary>
+            <div class="course-content">
+              <p class="course-prerequisite"><i class="fa-solid fa-link"></i> Recommended prerequisite: basic HTML.</p>
+              <div class="month-block">
+                <h3>Month 1 · Styling Fundamentals</h3>
+                <ol class="week-list">
+                  <li><strong>Week 1:</strong> CSS purpose, syntax, comments and linking an external stylesheet.</li>
+                  <li><strong>Week 2:</strong> Selectors, colours, backgrounds, fonts, text alignment and units.</li>
+                  <li><strong>Week 3:</strong> The box model: margin, border, padding, width and height.</li>
+                  <li><strong>Week 4:</strong> Month 1 assessment: style an existing HTML page.</li>
+                </ol>
+              </div>
+              <div class="month-block">
+                <h3>Month 2 · Page Layout</h3>
+                <ol class="week-list" start="5">
+                  <li><strong>Week 5:</strong> Display types, positioning basics and organising page sections.</li>
+                  <li><strong>Week 6:</strong> Flexbox alignment, spacing and responsive rows/columns.</li>
+                  <li><strong>Week 7:</strong> CSS Grid for cards, galleries and page layouts.</li>
+                  <li><strong>Week 8:</strong> Month 2 assessment: recreate a responsive page layout.</li>
+                </ol>
+              </div>
+              <div class="month-block">
+                <h3>Month 3 · Responsive Design</h3>
+                <ol class="week-list" start="9">
+                  <li><strong>Week 9:</strong> Media queries, mobile-first thinking and responsive images.</li>
+                  <li><strong>Week 10:</strong> Hover states, transitions, CSS variables and design consistency.</li>
+                  <li><strong>Week 11:</strong> Final responsive website design project.</li>
+                  <li><strong>Week 12:</strong> Accessibility checks, polishing, final assessment and presentation.</li>
+                </ol>
+              </div>
+            </div>
+          </details>
+
+          <details class="course-card">
+            <summary>
+              <span class="course-icon"><i class="fa-solid fa-microchip"></i></span>
+              <span class="course-heading"><strong>Arduino Beginner</strong><small>Electronics, sensors and a working prototype</small></span>
+              <span class="course-meta">12 weeks</span>
+              <i class="fa-solid fa-chevron-down course-chevron"></i>
+            </summary>
+            <div class="course-content">
+              <div class="month-block">
+                <h3>Month 1 · Electronics and Output</h3>
+                <ol class="week-list">
+                  <li><strong>Week 1:</strong> Electronics safety, Arduino board tour, Arduino IDE, uploading code and the Blink example.</li>
+                  <li><strong>Week 2:</strong> Breadboard basics, LEDs, resistors, digital output and simple timing.</li>
+                  <li><strong>Week 3:</strong> Buttons, digital input, pull-up resistors and controlling an LED.</li>
+                  <li><strong>Week 4:</strong> Month 1 assessment: build a button-controlled traffic light.</li>
+                </ol>
+              </div>
+              <div class="month-block">
+                <h3>Month 2 · Sensors and Feedback</h3>
+                <ol class="week-list" start="5">
+                  <li><strong>Week 5:</strong> Analogue input with a potentiometer or light sensor and reading values in Serial Monitor.</li>
+                  <li><strong>Week 6:</strong> PWM, LED brightness and beginner buzzer control.</li>
+                  <li><strong>Week 7:</strong> Ultrasonic distance sensor, measurements and threshold decisions.</li>
+                  <li><strong>Week 8:</strong> Month 2 assessment: create a sensor-based warning system.</li>
+                </ol>
+              </div>
+              <div class="month-block">
+                <h3>Month 3 · Motion and Prototype</h3>
+                <ol class="week-list" start="9">
+                  <li><strong>Week 9:</strong> Servo motor control and mapping sensor values to movement.</li>
+                  <li><strong>Week 10:</strong> Functions, combining components, troubleshooting circuits and project planning.</li>
+                  <li><strong>Week 11:</strong> Final prototype construction and testing.</li>
+                  <li><strong>Week 12:</strong> Prototype demonstration, final assessment and improvement discussion.</li>
+                </ol>
+              </div>
+            </div>
+          </details>
+
+          <details class="course-card">
+            <summary>
+              <span class="course-icon"><i class="fa-solid fa-cat"></i></span>
+              <span class="course-heading"><strong>Scratch Creative Coding</strong><small>Animation, game logic and a final game</small></span>
+              <span class="course-meta">12 weeks</span>
+              <i class="fa-solid fa-chevron-down course-chevron"></i>
+            </summary>
+            <div class="course-content">
+              <div class="month-block">
+                <h3>Month 1 · Animation Basics</h3>
+                <ol class="week-list">
+                  <li><strong>Week 1:</strong> Scratch interface, sprites, the stage, events and sequencing blocks.</li>
+                  <li><strong>Week 2:</strong> Motion, directions, coordinates and moving to exact positions.</li>
+                  <li><strong>Week 3:</strong> Looks, costumes, sound, speech and simple animation timing.</li>
+                  <li><strong>Week 4:</strong> Month 1 assessment: create a short interactive animation.</li>
+                </ol>
+              </div>
+              <div class="month-block">
+                <h3>Month 2 · Game Logic</h3>
+                <ol class="week-list" start="5">
+                  <li><strong>Week 5:</strong> Variables, operators, scores, timers and lives.</li>
+                  <li><strong>Week 6:</strong> Sensing, <code>if</code> conditions, keyboard input and collisions.</li>
+                  <li><strong>Week 7:</strong> Repetition, forever loops, repeat blocks and nested control.</li>
+                  <li><strong>Week 8:</strong> Month 2 assessment: build a playable mini game.</li>
+                </ol>
+              </div>
+              <div class="month-block">
+                <h3>Month 3 · Advanced Creation</h3>
+                <ol class="week-list" start="9">
+                  <li><strong>Week 9:</strong> Clones, spawning objects and managing repeated game elements.</li>
+                  <li><strong>Week 10:</strong> Broadcast messages, scene changes and custom blocks.</li>
+                  <li><strong>Week 11:</strong> Final game planning, building and playtesting.</li>
+                  <li><strong>Week 12:</strong> Debugging, final assessment, game presentation and peer feedback.</li>
+                </ol>
+              </div>
+            </div>
+          </details>
+
+          <details class="course-card">
+            <summary>
+              <span class="course-icon"><i class="fa-solid fa-chart-column"></i></span>
+              <span class="course-heading"><strong>Power BI for Business &amp; Data Reporting</strong><small>From messy data to a business-ready dashboard</small></span>
+              <span class="course-meta">12 weeks</span>
+              <i class="fa-solid fa-chevron-down course-chevron"></i>
+            </summary>
+            <div class="course-content">
+              <div class="month-block">
+                <h3>Month 1 · Power BI and Data Preparation</h3>
+                <ol class="week-list">
+                  <li><strong>Week 1:</strong> What Power BI is, Power BI vs Excel, Desktop/Service/Mobile, interface tour, datasets, reports and dashboards. Create a first <code>.pbix</code> report.</li>
+                  <li><strong>Week 2:</strong> Import Excel, CSV and folder data; introduction to Power Query and why clean data matters.</li>
+                  <li><strong>Week 3:</strong> Remove duplicates, rename columns, change data types, filter rows, split/merge columns and handle missing values.</li>
+                  <li><strong>Week 4:</strong> Month 1 assessment: clean a messy business dataset and produce a simple report.</li>
+                </ol>
+              </div>
+              <div class="month-block">
+                <h3>Month 2 · Modelling and Dashboard Design</h3>
+                <ol class="week-list" start="5">
+                  <li><strong>Week 5:</strong> Data models, fact and lookup tables, relationships, one-to-many cardinality and common modelling mistakes.</li>
+                  <li><strong>Week 6:</strong> Bar, column, line, table and matrix visuals; when to avoid pie charts and how to choose the right visual.</li>
+                  <li><strong>Week 7:</strong> Filters, slicers, drill-down, tooltips, layout, themes and consistent formatting.</li>
+                  <li><strong>Week 8:</strong> Month 2 assessment: build an interactive sales dashboard with product, date and region filters.</li>
+                </ol>
+              </div>
+              <div class="month-block">
+                <h3>Month 3 · DAX and Real Business Use</h3>
+                <ol class="week-list" start="9">
+                  <li><strong>Week 9:</strong> DAX fundamentals, calculated columns vs measures, <code>SUM</code>, <code>COUNT</code> and <code>AVERAGE</code>.</li>
+                  <li><strong>Week 10:</strong> <code>CALCULATE</code>, filter context, category comparisons and beginner time-based analysis.</li>
+                  <li><strong>Week 11:</strong> Publishing to Power BI Service, sharing, manual/scheduled refresh concepts, governance and monthly reporting use cases.</li>
+                  <li><strong>Week 12:</strong> Final business dashboard project, presentation, assessment and workplace implementation plan.</li>
+                </ol>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
 
       <section class="plans container" id="plans">
         <div class="section-head">
-          <h2>Plans</h2>
-          <!-- <p class="muted">
-            Choose a plan that matches your pace,from community support to full 1-to-1 coaching.
-          </p> -->
+          <p class="eyebrow">Monthly learning plans</p>
+          <h2>Choose Your Plan</h2>
+          <p class="muted">All prices are in Malaysian Ringgit. Monthly-plan classes are group-based by default. If only one learner joins a scheduled class, it may continue as a one-person class at the same monthly price.</p>
         </div>
-      
-        <!-- Quick understanding at first glance -->
+
         <div class="how-it-works">
           <div class="how-card">
             <i class="fa-solid fa-clipboard-check"></i>
-            <h3>Pick a plan</h3>
-            <p class="muted">Start small or go all-in, you can upgrade any time.</p>
+            <h3>Pick a programme</h3>
+            <p class="muted">Choose a syllabus and a plan that matches the amount of guidance you need.</p>
+          </div>
+          <div class="how-card">
+            <i class="fa-solid fa-calendar-check"></i>
+            <h3>Confirm the arrangement</h3>
+            <p class="muted">Monthly timetables are announced by FE Academy. Personal and custom sessions are arranged directly after we review the request.</p>
           </div>
           <div class="how-card">
             <i class="fa-solid fa-laptop-code"></i>
-            <h3>Join classes</h3>
-            <p class="muted">Get guided sessions, materials, and recordings (plan dependent).</p>
-          </div>
-          <div class="how-card">
-            <i class="fa-solid fa-comments"></i>
-            <h3>Ask & build</h3>
-            <p class="muted">Get help via Discord Q&A and grow through projects.</p>
+            <h3>Learn and build</h3>
+            <p class="muted">Attend live sessions, practise with materials and complete assessments or projects.</p>
           </div>
         </div>
-      
-        <!-- Tier Cards -->
+
         <div class="plan-grid">
-      
-          <!-- Hello World -->
           <article class="plan-card">
             <div class="plan-top">
               <span class="plan-badge">Starter</span>
-              <h3>Hello World!</h3>
-              <div class="plan-price">
-                <span class="amount">USD 1 (RM 4.05)</span><span class="per">/ month</span>
-              </div>
-            </div>
-            <ul class="plan-features">
-              <li><i class="fa-solid fa-check"></i> Access to Discord community</li>
-              <li><i class="fa-solid fa-check"></i> Stay in the server even if you unsubscribe (unless rules are violated)</li>
-            </ul>
-            <a class="plan-cta" href="https://www.patreon.com/c/firdauseisner/membership" target="_blank" rel="noopener">
-              Join on Patreon <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-          </article>
-      
-          <!-- Script Kiddie -->
-          <article class="plan-card">
-            <div class="plan-top">
-              <!-- <span class="plan-badge popular">Most popular</span> -->
               <h3>Script Kiddie</h3>
-              <div class="plan-price">
-                <span class="amount">USD 15 (RM 60.80)</span><span class="per">/ month</span>
-              </div>
+              <div class="plan-price"><span class="amount">RM 100</span><span class="per">/ month</span></div>
+              <div class="plan-count" data-plan-count="script-kiddie"><i class="fa-solid fa-users"></i><span>Enrolment count pending</span></div>
             </div>
             <ul class="plan-features">
-              <li><i class="fa-solid fa-check"></i> Everything in Hello World</li>
-              <li><i class="fa-solid fa-check"></i> Weekly 1-hour live class (one programme)</li>
-              <li><i class="fa-solid fa-check"></i> Class materials + recordings (for attended classes)</li>
-              <li><i class="fa-solid fa-check"></i> Help catching up via recordings & community</li>
+              <li><i class="fa-solid fa-check"></i> Access to the FE Academy Discord community</li>
+              <li><i class="fa-solid fa-check"></i> Remain in the community after leaving the plan, provided community rules are followed</li>
+              <li><i class="fa-solid fa-check"></i> One weekly 1-hour live class for one selected programme</li>
+              <li><i class="fa-solid fa-check"></i> Class materials and recordings for your enrolled class</li>
+              <li><i class="fa-solid fa-check"></i> Community support for catching up and practising</li>
             </ul>
-            <a class="plan-cta" href="https://www.patreon.com/c/firdauseisner/membership" target="_blank" rel="noopener">
-              Join on Patreon <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
+            <a class="plan-cta" data-registration-link href="#registration-form">Register interest <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </article>
-      
-          <!-- Debugger -->
+
           <article class="plan-card">
             <div class="plan-top">
-              <span class="plan-badge">Level up</span>
+              <span class="plan-badge popular">More practice</span>
               <h3>Debugger</h3>
-              <div class="plan-price">
-                <span class="amount">USD 25 (RM 101.34)</span><span class="per">/ month</span>
-              </div>
+              <div class="plan-price"><span class="amount">RM 180</span><span class="per">/ month</span></div>
+              <div class="plan-count" data-plan-count="debugger"><i class="fa-solid fa-users"></i><span>Enrolment count pending</span></div>
             </div>
             <ul class="plan-features">
-              <li><i class="fa-solid fa-check"></i> Everything in previous tiers</li>
-              <li><i class="fa-solid fa-check"></i> Weekly 1-hour live class (two classes)</li>
-              <li><i class="fa-solid fa-check"></i> Higher priority Discord Q&amp;A</li>
+              <li><i class="fa-solid fa-check"></i> Everything included in Script Kiddie</li>
+              <li><i class="fa-solid fa-check"></i> Access to two weekly 1-hour live classes</li>
+              <li><i class="fa-solid fa-check"></i> Learn two programmes or use the second session for guided practice</li>
+              <li><i class="fa-solid fa-check"></i> Higher-priority Discord questions and debugging support</li>
             </ul>
-            <a class="plan-cta" href="https://www.patreon.com/c/firdauseisner/membership" target="_blank" rel="noopener">
-              Join on Patreon <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
+            <a class="plan-cta" data-registration-link href="#registration-form">Register interest <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </article>
-      
-          <!-- Developer / Entrepreneur -->
+
           <article class="plan-card">
             <div class="plan-top">
               <span class="plan-badge">Builder</span>
-              <h3>Developer / Entrepreneur</h3>
-              <div class="plan-price">
-                <span class="amount">USD 60 (RM 243.21)</span><span class="per">/ month</span>
-              </div>
+              <h3>Developer</h3>
+              <div class="plan-price"><span class="amount">RM 290</span><span class="per">/ month</span></div>
+              <div class="plan-count" data-plan-count="developer"><i class="fa-solid fa-users"></i><span>Enrolment count pending</span></div>
             </div>
             <ul class="plan-features">
-              <li><i class="fa-solid fa-check"></i> Everything in previous tiers</li>
-              <li><i class="fa-solid fa-check"></i> Access to all classes</li>
-              <li><i class="fa-solid fa-check"></i> Tips on building your brand & business</li>
-              <li><i class="fa-solid fa-check"></i> Monthly project ideas</li>
-              <li><i class="fa-solid fa-check"></i> Monthly podcasts with people in the industry</li>
+              <li><i class="fa-solid fa-check"></i> Everything included in the previous plans</li>
+              <li><i class="fa-solid fa-check"></i> Access to all available scheduled group classes</li>
+              <li><i class="fa-solid fa-check"></i> Monthly project ideas and guided project development</li>
+              <li><i class="fa-solid fa-check"></i> Introductory guidance on portfolios, branding and turning skills into practical work</li>
+              <li><i class="fa-solid fa-check"></i> Access to selected industry sharing sessions or podcasts</li>
             </ul>
-            <a class="plan-cta" href="https://www.patreon.com/c/firdauseisner/membership" target="_blank" rel="noopener">
-              Join on Patreon <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
+            <a class="plan-cta" data-registration-link href="#registration-form">Register interest <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </article>
-      
-          <!-- Fullstack -->
+
           <article class="plan-card highlight">
             <div class="plan-top">
-              <span class="plan-badge limited">Limited</span>
-              <h3>Fullstack</h3>
-              <div class="plan-price">
-                <span class="amount">USD 100 (RM 405.35)</span><span class="per">/ month</span>
-              </div>
+              <span class="plan-badge limited">Advanced</span>
+              <h3>Full Stack</h3>
+              <div class="plan-price"><span class="amount">RM 450</span><span class="per">/ month</span></div>
+              <div class="plan-count" data-plan-count="full-stack"><i class="fa-solid fa-users"></i><span>Enrolment count pending</span></div>
             </div>
             <ul class="plan-features">
-              <li><i class="fa-solid fa-check"></i> Everything in previous tiers</li>
-              <li><i class="fa-solid fa-check"></i> Weekly 2-hour 1-to-1 coaching</li>
-              <li><i class="fa-solid fa-check"></i> Suggest your topic & language (check with the team first)</li>
-              <li><i class="fa-solid fa-check"></i> Highest priority Discord questions</li>
+              <li><i class="fa-solid fa-check"></i> Everything included in the previous plans</li>
+              <li><i class="fa-solid fa-check"></i> One weekly 2-hour advanced coaching session</li>
+              <li><i class="fa-solid fa-check"></i> Request a topic, language or project direction, subject to trainer confirmation</li>
+              <li><i class="fa-solid fa-check"></i> Highest-priority technical questions and project feedback</li>
+              <li><i class="fa-solid fa-check"></i> Suitable for learners building a larger project or combining several skills</li>
             </ul>
-            <p class="plan-note muted">
-              Tip: message the trainer team in Discord (or email) before purchasing to confirm your requested topic is manageable.
-            </p>
-            <a class="plan-cta" href="https://www.patreon.com/c/firdauseisner/membership" target="_blank" rel="noopener">
-              Join on Patreon <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </a>
-            
+            <p class="plan-note muted">Please contact the trainer before registering so we can confirm that your requested topic, software and project scope are manageable.</p>
+            <a class="plan-cta" data-registration-link href="#registration-form">Register interest <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </article>
-      
         </div>
-      
-        <!-- Shop (one-time purchases) -->
-        <div class="shop-box">
-          <div class="shop-left">
-            <h3>Prefer one-time purchases?</h3>
-            <p class="muted">
-              You can also buy individual products directly from our Patreon Shop.
-            </p>
+
+        <div class="discount-grid" aria-label="Available discounts">
+          <article class="discount-card">
+            <span class="discount-icon"><i class="fa-solid fa-people-roof"></i></span>
+            <div><h3>Family Discount</h3><p>When a family member joins, the enrolled family member receives <strong>5% off</strong> the monthly course fee for the course duration while both family enrolments remain active.</p></div>
+          </article>
+          <article class="discount-card">
+            <span class="discount-icon"><i class="fa-solid fa-receipt"></i></span>
+            <div><h3>Full-Course Payment</h3><p>Pay the full three-month course fee in one payment and receive <strong>5% off</strong> the course total.</p></div>
+          </article>
+        </div>
+
+        <div class="registration-box">
+          <div>
+            <p class="eyebrow">Direct registration available</p>
+            <h3>Register directly with FE Academy</h3>
+            <p class="muted">Choose the learner's plan and the programme choices included in it. FE Academy will announce the monthly timetable later, while personal or custom sessions will be arranged directly with the learner or parent.</p>
           </div>
-          <a class="shop-cta" href="https://www.patreon.com/c/firdauseisner/shop" target="_blank" rel="noopener">
-            Visit Shop <i class="fa-solid fa-cart-shopping"></i>
-          </a>
+          <a class="shop-cta" data-registration-link href="#registration-form">Open registration form <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
         </div>
       </section>
-      
+
+      <section class="extra-classes container" id="extra-classes">
+        <div class="section-head">
+          <p class="eyebrow">Flexible hourly support</p>
+          <h2>Extra, Personal &amp; Consultation Classes</h2>
+          <p class="muted">Book an additional lesson without changing your monthly plan. Student rates require a valid student ID or another accepted proof of current enrolment. Monthly plans are counted by learners; hourly support is counted by completed sessions.</p>
+         
+        </div>
+
+        <div class="rate-grid">
+          <article class="rate-card">
+            <span class="rate-icon"><i class="fa-solid fa-book"></i></span>
+            <h3>Programme-Syllabus Class</h3>
+             <div class="service-counts" aria-label="Completed hourly sessions">
+            <div class="plan-count service-count" data-plan-count="extra-class"><i class="fa-solid fa-calendar-check"></i><span>Extra class count pending</span></div>
+             </div>
+            <p class="muted">Extra revision, a personal lesson or support based on an existing FE Academy programme syllabus. We will contact the learner or parent directly to arrange the session.</p>
+            <div class="rate-row"><span>Student</span><strong>RM 25 / hour</strong></div>
+            <div class="rate-row"><span>Non-student</span><strong>RM 35 / hour</strong></div>
+            <a class="secondary-action full-width" data-registration-link href="#registration-form">Request an extra class</a>
+          </article>
+
+          <article class="rate-card highlight-rate">
+            <span class="rate-icon"><i class="fa-solid fa-lightbulb"></i></span>
+            <h3>Custom Topic, Competition or Consultation</h3>
+             <div class="service-counts" aria-label="Completed hourly sessions">
+            <div class="plan-count service-count" data-plan-count="custom-topic"><i class="fa-solid fa-screwdriver-wrench"></i><span>Custom session count pending</span></div>
+          </div>
+            <p class="muted">Out-of-syllabus learning, project consultation, competition preparation or specialist technical guidance. Requests are reviewed before a session is confirmed.</p>
+            <div class="rate-row"><span>Student</span><strong>RM 30 / hour</strong></div>
+            <div class="rate-row"><span>Non-student</span><strong>RM 40 / hour</strong></div>
+            <a class="secondary-action full-width" data-registration-link href="#registration-form">Submit for feasibility review</a>
+          </article>
+        </div>
+
+        <div class="booking-note">
+          <i class="fa-solid fa-calendar-days"></i>
+          <p>Hourly sessions depend on trainer availability and topic suitability. For custom or troubleshooting requests, the first session may be used as a trial and feasibility assessment. Payment is due when the issue is solved or meaningful progress is made and the client is satisfied with the session. No fee is required when FE Academy confirms the request is not feasible or no meaningful progress is made.</p>
+        </div>
+      </section>
 
       <section class="instructors container" id="instructors">
         <div class="section-head">
@@ -489,7 +719,6 @@
       <section class="reviews container" id="reviews">
         <div class="section-head">
           <h2>Reviews</h2>
-          <p class="muted">Real feedback from students shown after approval.</p>
         </div>
       
         <div class="reviews-carousel" aria-label="Reviews carousel">
