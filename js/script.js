@@ -18,6 +18,336 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
+    // ===== LOCAL LANGUAGE SWITCHER (NO GOOGLE TRANSLATE) =====
+    const translations = window.FE_TRANSLATIONS || {};
+    const languageSwitcher = document.getElementById("languageSwitcher");
+    const languageToggle = document.getElementById("languageToggle");
+    const languageMenu = document.getElementById("languageMenu");
+    const languageShort = languageToggle?.querySelector(".language-short");
+    const languageLabels = { en: "EN", ms: "BM", "zh-CN": "中", ja: "日", ko: "한" };
+    let currentLanguage = "en";
+    const originalText = new WeakMap();
+
+    const STATIC_TRANSLATION_SKIP = [
+      ".notranslate", "[translate='no']", "code", "pre", "script", "style", "textarea", "select", "option", "input",
+      "#languageMenu", "#revTrack", "#revDots", "#ytTrack", "#ytDots", ".plan-count", ".converted-price"
+    ].join(",");
+
+    function splitOuterWhitespace(value) {
+      const match = String(value ?? "").match(/^(\s*)([\s\S]*?)(\s*)$/);
+      return { leading: match?.[1] || "", core: match?.[2] || "", trailing: match?.[3] || "" };
+    }
+
+    function collectStaticTextNodes() {
+      const nodes = [];
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = walker.nextNode())) {
+        if (!node.nodeValue || !node.nodeValue.trim()) continue;
+        const parent = node.parentElement;
+        if (!parent || parent.closest(STATIC_TRANSLATION_SKIP)) continue;
+        if (!originalText.has(node)) originalText.set(node, node.nodeValue);
+        nodes.push(node);
+      }
+      return nodes;
+    }
+
+    function translatePhrase(english, language = currentLanguage) {
+      if (language === "en") return english;
+      const table = translations[language] || {};
+      return table[english] || english;
+    }
+
+    function translateCountLabels(language) {
+      document.querySelectorAll("[data-plan-count] span").forEach((span) => {
+        if (!span.dataset.englishCount) span.dataset.englishCount = span.textContent.trim();
+        const source = span.dataset.englishCount;
+        if (language === "en") {
+          span.textContent = source;
+          return;
+        }
+
+        const match = source.match(/^(\d+)\s+(.+)$/);
+        if (!match) {
+          span.textContent = translatePhrase(source, language);
+          return;
+        }
+        const number = match[1];
+        const label = match[2].toLowerCase();
+        const countWords = {
+          ms: { learner: "pelajar berdaftar", learners: "pelajar berdaftar", session: "sesi selesai", sessions: "sesi selesai" },
+          "zh-CN": { learner: "名学习者已报名", learners: "名学习者已报名", session: "次课程已完成", sessions: "次课程已完成" },
+          ja: { learner: "名受講中", learners: "名受講中", session: "回完了", sessions: "回完了" },
+          ko: { learner: "명 등록", learners: "명 등록", session: "회 완료", sessions: "회 완료" }
+        }[language] || {};
+        let replacement = label;
+        if (label.includes("learner")) replacement = countWords.learners || label;
+        else if (label.includes("session")) replacement = countWords.sessions || label;
+        span.textContent = `${number} ${replacement}`;
+      });
+    }
+
+    function applyLanguage(language) {
+      currentLanguage = translations[language] || language === "en" ? language : "en";
+      const table = translations[currentLanguage] || {};
+
+      collectStaticTextNodes().forEach((node) => {
+        const source = originalText.get(node) ?? node.nodeValue;
+        const parts = splitOuterWhitespace(source);
+        const translated = currentLanguage === "en" ? parts.core : (table[parts.core] || parts.core);
+        node.nodeValue = `${parts.leading}${translated}${parts.trailing}`;
+      });
+
+      document.documentElement.lang = currentLanguage === "zh-CN" ? "zh-CN" : currentLanguage;
+      document.documentElement.dir = "ltr";
+      if (languageShort) languageShort.textContent = languageLabels[currentLanguage] || "EN";
+      document.querySelectorAll("[data-language]").forEach((button) => {
+        const active = button.dataset.language === currentLanguage;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
+      translateCountLabels(currentLanguage);
+      syncProgrammeBrowserLabel();
+      if (typeof renderConvertedPrices === "function" && currentCurrency !== "MYR") renderConvertedPrices();
+    }
+
+    function closeLanguageMenu() {
+      if (!languageSwitcher || !languageToggle) return;
+      languageSwitcher.classList.remove("open");
+      languageToggle.setAttribute("aria-expanded", "false");
+      if (languageMenu) languageMenu.style.transform = "";
+    }
+
+    function keepLanguageMenuOnScreen() {
+      if (!languageMenu || !languageSwitcher?.classList.contains("open")) return;
+      languageMenu.style.transform = "";
+      requestAnimationFrame(() => {
+        const rect = languageMenu.getBoundingClientRect();
+        const gap = 8;
+        let shift = 0;
+        if (rect.left < gap) shift = gap - rect.left;
+        if (rect.right > innerWidth - gap) shift = (innerWidth - gap) - rect.right;
+        if (shift) languageMenu.style.transform = `translateX(${shift}px)`;
+      });
+    }
+
+    if (languageToggle && languageSwitcher) {
+      languageToggle.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const open = languageSwitcher.classList.toggle("open");
+        languageToggle.setAttribute("aria-expanded", String(open));
+        if (open) keepLanguageMenuOnScreen();
+      });
+      document.addEventListener("click", (event) => {
+        if (!languageSwitcher.contains(event.target)) closeLanguageMenu();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeLanguageMenu();
+      });
+      window.addEventListener("resize", keepLanguageMenuOnScreen);
+    }
+
+    document.querySelectorAll("[data-language]").forEach((button) => {
+      button.addEventListener("click", () => {
+        applyLanguage(button.dataset.language || "en");
+        closeLanguageMenu();
+      });
+    });
+
+    // ===== PROGRAMME LIST BUTTON =====
+    const programmeBrowserToggle = document.getElementById("programmeBrowserToggle");
+    const programmeGrid = document.getElementById("programmeGrid");
+
+    function syncProgrammeBrowserLabel() {
+      if (!programmeBrowserToggle || !programmeGrid) return;
+      const isOpen = !programmeGrid.hidden;
+      const show = programmeBrowserToggle.querySelector(".programme-show-label");
+      const hide = programmeBrowserToggle.querySelector(".programme-hide-label");
+      if (show) show.textContent = translatePhrase("Show programmes");
+      if (hide) hide.textContent = translatePhrase("Hide programmes");
+      programmeBrowserToggle.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    if (programmeBrowserToggle && programmeGrid) {
+      programmeBrowserToggle.addEventListener("click", () => {
+        const willOpen = programmeGrid.hidden;
+        programmeGrid.hidden = !willOpen;
+        if (!willOpen) {
+          programmeGrid.querySelectorAll("details.course-card[open]").forEach((card) => card.removeAttribute("open"));
+        }
+        syncProgrammeBrowserLabel();
+      });
+      programmeGrid.hidden = true;
+      syncProgrammeBrowserLabel();
+    }
+
+    // ===== LIVE CURRENCY REFERENCE =====
+    const currencySelect = document.getElementById("currencySelect");
+    const currencyStatus = document.getElementById("currencyStatus");
+    const priceElements = Array.from(document.querySelectorAll("[data-myr-price]"));
+    const FX_CACHE_KEY = "fe-academy-myr-fx-cache-v2";
+    const FX_CACHE_MAX_AGE = 7 * 24 * 60 * 60 * 1000; // last-known fallback only
+    let currentRate = 1;
+    let currentCurrency = "MYR";
+    let activeCurrencyRequest = 0;
+
+    function clearConvertedPrices() {
+      document.querySelectorAll(".converted-price").forEach((node) => node.remove());
+    }
+
+    function renderConvertedPrices() {
+      clearConvertedPrices();
+      if (currentCurrency === "MYR" || !Number.isFinite(currentRate)) return;
+
+      const locale = currentLanguage === "ms"
+        ? "ms-MY"
+        : currentLanguage === "ja"
+          ? "ja-JP"
+          : currentLanguage === "ko"
+            ? "ko-KR"
+            : currentLanguage === "zh-CN"
+              ? "zh-CN"
+              : "en-US";
+
+      priceElements.forEach((element) => {
+        const myr = Number(element.dataset.myrPrice);
+        if (!Number.isFinite(myr)) return;
+
+        const converted = myr * currentRate;
+        const note = document.createElement("small");
+        note.className = "converted-price";
+        note.textContent = `≈ ${new Intl.NumberFormat(locale, {
+          style: "currency",
+          currency: currentCurrency,
+          maximumFractionDigits: ["JPY", "KRW", "IDR"].includes(currentCurrency) ? 0 : 2
+        }).format(converted)}`;
+        element.insertAdjacentElement("afterend", note);
+      });
+    }
+
+    function readFxCache(currency) {
+      try {
+        const raw = localStorage.getItem(FX_CACHE_KEY);
+        if (!raw) return null;
+        const cache = JSON.parse(raw);
+        const item = cache?.rates?.[currency];
+        if (!item || !Number.isFinite(Number(item.rate))) return null;
+        return {
+          rate: Number(item.rate),
+          date: item.date || "",
+          savedAt: Number(item.savedAt) || 0
+        };
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function saveFxCache(currency, rate, date) {
+      try {
+        const raw = localStorage.getItem(FX_CACHE_KEY);
+        const cache = raw ? JSON.parse(raw) : { rates: {} };
+        if (!cache.rates || typeof cache.rates !== "object") cache.rates = {};
+        cache.rates[currency] = { rate, date: date || "", savedAt: Date.now() };
+        localStorage.setItem(FX_CACHE_KEY, JSON.stringify(cache));
+      } catch (error) {
+        // Conversion still works when storage is blocked; only the fallback cache is skipped.
+      }
+    }
+
+    async function fetchJsonWithTimeout(url, timeoutMs = 8000) {
+      const controller = new AbortController();
+      const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        const response = await fetch(url, {
+          cache: "no-store",
+          signal: controller.signal,
+          headers: { Accept: "application/json" }
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return await response.json();
+      } finally {
+        window.clearTimeout(timer);
+      }
+    }
+
+    async function fetchLiveMyrRate(currency) {
+      // Primary: Frankfurter's current v2 API.
+      try {
+        const data = await fetchJsonWithTimeout(
+          `https://api.frankfurter.dev/v2/rate/MYR/${encodeURIComponent(currency)}`
+        );
+        const rate = Number(data?.rate);
+        if (Number.isFinite(rate) && rate > 0) {
+          return { rate, date: data?.date || "", source: "v2" };
+        }
+        throw new Error("v2 rate unavailable");
+      } catch (primaryError) {
+        // Fallback: Frankfurter v1 remains supported and uses a different response shape.
+        const data = await fetchJsonWithTimeout(
+          `https://api.frankfurter.dev/v1/latest?base=MYR&symbols=${encodeURIComponent(currency)}`
+        );
+        const rate = Number(data?.rates?.[currency]);
+        if (!Number.isFinite(rate) || rate <= 0) throw primaryError;
+        return { rate, date: data?.date || "", source: "v1" };
+      }
+    }
+
+    async function updateCurrency(currency) {
+      const requestId = ++activeCurrencyRequest;
+      currentCurrency = currency;
+
+      if (currency === "MYR") {
+        currentRate = 1;
+        clearConvertedPrices();
+        if (currencyStatus) currencyStatus.textContent = translatePhrase("Select a currency to see approximate conversions.");
+        return;
+      }
+
+      if (currencyStatus) currencyStatus.textContent = translatePhrase("Loading exchange rate…");
+
+      try {
+        const live = await fetchLiveMyrRate(currency);
+        if (requestId !== activeCurrencyRequest || currentCurrency !== currency) return;
+
+        currentRate = live.rate;
+        saveFxCache(currency, live.rate, live.date);
+        renderConvertedPrices();
+        if (currencyStatus) {
+          currencyStatus.textContent = live.date
+            ? `${translatePhrase("Approximate reference rate")} · ${translatePhrase("Updated")} ${live.date}`
+            : translatePhrase("Approximate live reference rate");
+        }
+      } catch (error) {
+        if (requestId !== activeCurrencyRequest || currentCurrency !== currency) return;
+
+        const cached = readFxCache(currency);
+        if (cached && Date.now() - cached.savedAt <= FX_CACHE_MAX_AGE) {
+          currentRate = cached.rate;
+          renderConvertedPrices();
+          if (currencyStatus) {
+            currencyStatus.textContent = cached.date
+              ? `${translatePhrase("Live rate unavailable")} · ${translatePhrase("Using saved reference from")} ${cached.date}`
+              : `${translatePhrase("Live rate unavailable")} · ${translatePhrase("Using a recently saved reference rate")}`;
+          }
+          console.info("[Currency] Live rate unavailable; using cached rate", error);
+          return;
+        }
+
+        currentRate = NaN;
+        clearConvertedPrices();
+        if (currencyStatus) currencyStatus.textContent = translatePhrase("Live conversion is unavailable right now. RM prices remain the official fees.");
+        console.info("[Currency] Conversion unavailable", error);
+      }
+    }
+
+    if (currencySelect) {
+      currencySelect.addEventListener("change", () => updateCurrency(currencySelect.value));
+    }
+
+    // Always start in authored English. No language is saved between visits.
+    collectStaticTextNodes();
+    applyLanguage("en");
+
     // ===== ELEMENTS =====
     const root = document.documentElement;
   
@@ -281,7 +611,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const text = element.querySelector("span");
         if (text) text.textContent = `${entry.count} ${label}`;
         element.classList.add("has-count");
+        const textNode = element.querySelector("span");
+        if (textNode) textNode.dataset.englishCount = textNode.textContent.trim();
       });
+      translateCountLabels(currentLanguage);
     } catch (error) {
       console.info("[Counts] Public counts are not available yet.", error);
     }
