@@ -38,6 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
       return { leading: match?.[1] || "", core: match?.[2] || "", trailing: match?.[3] || "" };
     }
 
+    function normalizeTranslationKey(value) {
+      return String(value ?? "").replace(/\s+/g, " ").trim();
+    }
+
     function collectStaticTextNodes() {
       const nodes = [];
       const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
@@ -55,7 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function translatePhrase(english, language = currentLanguage) {
       if (language === "en") return english;
       const table = translations[language] || {};
-      return table[english] || english;
+      const key = normalizeTranslationKey(english);
+      return table[english] || table[key] || english;
     }
 
     function translateCountLabels(language) {
@@ -94,7 +99,8 @@ document.addEventListener("DOMContentLoaded", () => {
       collectStaticTextNodes().forEach((node) => {
         const source = originalText.get(node) ?? node.nodeValue;
         const parts = splitOuterWhitespace(source);
-        const translated = currentLanguage === "en" ? parts.core : (table[parts.core] || parts.core);
+        const key = normalizeTranslationKey(parts.core);
+        const translated = currentLanguage === "en" ? parts.core : (table[parts.core] || table[key] || parts.core);
         node.nodeValue = `${parts.leading}${translated}${parts.trailing}`;
       });
 

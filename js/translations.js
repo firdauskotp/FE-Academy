@@ -1021,3 +1021,26 @@ window.FE_TRANSLATIONS.ko['Approximate live reference rate']='예상 실시간 �
 window.FE_TRANSLATIONS.ko['Live rate unavailable']='실시간 환율을 사용할 수 없음';
 window.FE_TRANSLATIONS.ko['Using saved reference from']='저장된 참고 환율 사용';
 window.FE_TRANSLATIONS.ko['Using a recently saved reference rate']='최근 저장된 참고 환율을 사용 중입니다';
+
+// Completion pass for multiline HTML copy and instructor skill descriptions.
+// The runtime normalises whitespace, so long paragraphs can match the dictionary
+// even when the authored HTML contains indentation and line breaks.
+window.FE_TRANSLATIONS.ms['and']='dan';
+window.FE_TRANSLATIONS['zh-CN']['and']='和';
+window.FE_TRANSLATIONS.ja['and']='と';
+window.FE_TRANSLATIONS.ko['and']='및';
+
+window.FE_TRANSLATIONS.ms['Python, HTML, CSS, Java, MIT App Inventor, Flutter, Arduino IDE, CyberSecurity, ICT, Linux basics, MySQL, MongoDB, Project-based learning.']='Python, HTML, CSS, Java, MIT App Inventor, Flutter, Arduino IDE, CyberSecurity, ICT, asas Linux, MySQL, MongoDB dan pembelajaran berasaskan projek.';
+window.FE_TRANSLATIONS['zh-CN']['Python, HTML, CSS, Java, MIT App Inventor, Flutter, Arduino IDE, CyberSecurity, ICT, Linux basics, MySQL, MongoDB, Project-based learning.']='Python、HTML、CSS、Java、MIT App Inventor、Flutter、Arduino IDE、网络安全、ICT、Linux 基础、MySQL、MongoDB、项目式学习。';
+window.FE_TRANSLATIONS.ja['Python, HTML, CSS, Java, MIT App Inventor, Flutter, Arduino IDE, CyberSecurity, ICT, Linux basics, MySQL, MongoDB, Project-based learning.']='Python、HTML、CSS、Java、MIT App Inventor、Flutter、Arduino IDE、CyberSecurity、ICT、Linux基礎、MySQL、MongoDB、プロジェクト型学習。';
+window.FE_TRANSLATIONS.ko['Python, HTML, CSS, Java, MIT App Inventor, Flutter, Arduino IDE, CyberSecurity, ICT, Linux basics, MySQL, MongoDB, Project-based learning.']='Python, HTML, CSS, Java, MIT App Inventor, Flutter, Arduino IDE, CyberSecurity, ICT, Linux 기초, MySQL, MongoDB, 프로젝트 기반 학습.';
+
+window.FE_TRANSLATIONS.ms['Python, HTML, MIT App Inventor, Arduino, Mechatronics, Drones, Electronics (Modern, Digital, Analogue), Aerospace basics, Physics, and Mathematics.']='Python, HTML, MIT App Inventor, Arduino, Mekatronik, Dron, Elektronik (Moden, Digital, Analog), asas Aeroangkasa, Fizik dan Matematik.';
+window.FE_TRANSLATIONS['zh-CN']['Python, HTML, MIT App Inventor, Arduino, Mechatronics, Drones, Electronics (Modern, Digital, Analogue), Aerospace basics, Physics, and Mathematics.']='Python、HTML、MIT App Inventor、Arduino、机电一体化、无人机、电子学（现代、数字、模拟）、航空航天基础、物理和数学。';
+window.FE_TRANSLATIONS.ja['Python, HTML, MIT App Inventor, Arduino, Mechatronics, Drones, Electronics (Modern, Digital, Analogue), Aerospace basics, Physics, and Mathematics.']='Python、HTML、MIT App Inventor、Arduino、メカトロニクス、ドローン、電子工学（現代・デジタル・アナログ）、航空宇宙の基礎、物理、数学。';
+window.FE_TRANSLATIONS.ko['Python, HTML, MIT App Inventor, Arduino, Mechatronics, Drones, Electronics (Modern, Digital, Analogue), Aerospace basics, Physics, and Mathematics.']='Python, HTML, MIT App Inventor, Arduino, 메카트로닉스, 드론, 전자공학(현대·디지털·아날로그), 항공우주 기초, 물리, 수학.';
+
+window.FE_TRANSLATIONS.ms['Python, HTML, MIT App Inventor, Arduino, Flutter, Power BI, Microsoft Excel, Entrepreneurship, Business Planning, and Business Pitching.']='Python, HTML, MIT App Inventor, Arduino, Flutter, Power BI, Microsoft Excel, Keusahawanan, Perancangan Perniagaan dan Pembentangan Idea Perniagaan.';
+window.FE_TRANSLATIONS['zh-CN']['Python, HTML, MIT App Inventor, Arduino, Flutter, Power BI, Microsoft Excel, Entrepreneurship, Business Planning, and Business Pitching.']='Python、HTML、MIT App Inventor、Arduino、Flutter、Power BI、Microsoft Excel、创业、商业规划和商业路演。';
+window.FE_TRANSLATIONS.ja['Python, HTML, MIT App Inventor, Arduino, Flutter, Power BI, Microsoft Excel, Entrepreneurship, Business Planning, and Business Pitching.']='Python、HTML、MIT App Inventor、Arduino、Flutter、Power BI、Microsoft Excel、起業、ビジネスプラン作成、ビジネスピッチ。';
+window.FE_TRANSLATIONS.ko['Python, HTML, MIT App Inventor, Arduino, Flutter, Power BI, Microsoft Excel, Entrepreneurship, Business Planning, and Business Pitching.']='Python, HTML, MIT App Inventor, Arduino, Flutter, Power BI, Microsoft Excel, 창업, 비즈니스 계획, 비즈니스 피칭.';
